@@ -6,8 +6,6 @@ class progress_bar:
         self.display = False
 
     def display_bar(self):
-        print("x = 1+1")
-        print(self.total_epoch)
         self.bar = tqdm(total=self.total_epoch)
         self.display = True
     def update_bar(self):

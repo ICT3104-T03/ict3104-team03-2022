@@ -68,7 +68,7 @@ torch.cuda.manual_seed_all(SEED)
 random.seed(SEED)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
-print('Random_SEED!!!:', SEED)
+# print('Random_SEED!!!:', SEED)
 
 from torch.optim import lr_scheduler
 from torch.autograd import Variable
@@ -131,7 +131,7 @@ def load_data_rgb_skeleton(train_split, val_split, root_skeleton, root_rgb):
 
 def load_data(train_split, val_split, root):
     # Load Data
-    print("Length of train_split", len(train_split))
+    # print("Length of train_split", len(train_split))
     if len(train_split) > 0:
         dataset = Dataset(train_split, 'training', root, batch_size, classes)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=8,
@@ -158,8 +158,8 @@ def run(models, criterion, num_epochs=50):
 
     best_map = 0.0
     for epoch in range(num_epochs):
-        print('Epoch {}/{}'.format(epoch, num_epochs - 1))
-        print('-' * 10)
+        # print('Epoch {}/{}'.format(epoch, num_epochs - 1))
+        # print('-' * 10)
 
         probs = []
         for model, gpu, dataloader, optimizer, sched, model_file in models:
@@ -240,7 +240,7 @@ def train_step(model, gpu, optimizer, dataloader, epoch):
         train_map = 100 * apm.value()
     else:
         train_map = 100 * apm.value().mean()
-    print('train-map:', train_map)
+    # print('train-map:', train_map)
     apm.reset()
 
     epoch_loss = tot_loss / num_iter
@@ -285,7 +285,7 @@ def val_step(model, gpu, dataloader, epoch):
     epoch_loss = tot_loss / num_iter
 
     val_map = torch.sum(100 * apm.value()) / torch.nonzero(100 * apm.value()).size()[0]
-    print("apm value: ",100 * apm.value())
+    # print("apm value: ",100 * apm.value())
     classAccuracy = 100 * apm.value()
     apm.reset()
     return full_probs, epoch_loss, val_map, indexArray, classAccuracy
@@ -357,7 +357,6 @@ def output_csv(indexArray, frames, video_name, model_name, val_map, val_loss, cl
     writer.writerow(header)
     currentFrames = 0
     endFrames = 0
-    print(frames/len(indexArray))
     framesPerIndex = frames/len(indexArray)
     
     for i in range(0, len(indexArray)):
@@ -381,19 +380,15 @@ def output_csv(indexArray, frames, video_name, model_name, val_map, val_loss, cl
 
 if __name__ == '__main__':
     __spec__ = None
-    print(str(args.model))
-    print('batch_size:', batch_size)
-    print('cuda_avail', torch.cuda.is_available())
 
-    if args.mode == 'flow': # We did not touch flow
-        print('flow mode')
-        # print('flow mode', flow_root)
-        # dataloaders, datasets = load_data(train_split, test_split, flow_root)
-    elif args.mode == 'skeleton':
-        print('Pose mode', skeleton_root)
+    # if args.mode == 'flow': # We did not touch flow
+    #     # print('flow mode', flow_root)
+    #     dataloaders, datasets = load_data(train_split, test_split, flow_root)
+    if args.mode == 'skeleton':
+        # print('Pose mode', skeleton_root)
         dataloaders, datasets = load_data(train_split, test_split, skeleton_root)
     elif args.mode == 'rgb':
-        print('RGB mode', rgb_root)
+        # print('RGB mode', rgb_root)
         dataloaders, datasets = load_data(train_split, test_split, rgb_root)
 
     if args.train:
@@ -408,7 +403,7 @@ if __name__ == '__main__':
 
 
         if args.model=="PDAN":
-            print("you are processing PDAN")
+            # print("you are processing PDAN")
             from models import PDAN as Net
             model = Net(num_stages=1, num_layers=5, num_f_maps=mid_channel, dim=input_channnel, num_classes=classes)
 
@@ -420,22 +415,22 @@ if __name__ == '__main__':
             model = torch.load(args.load_model)
             # weight
             # model.load_state_dict(torch.load(str(args.load_model)))
-            print("loaded",args.load_model)
+            # print("loaded",args.load_model)
 
         pytorch_total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-        print('pytorch_total_params', pytorch_total_params)
-        print('num_channel:', num_channel, 'input_channnel:', input_channnel,'num_classes:', num_classes)
+        # print('pytorch_total_params', pytorch_total_params)
+        # print('num_channel:', num_channel, 'input_channnel:', input_channnel,'num_classes:', num_classes)
         model.cuda()
 
         criterion = nn.NLLLoss(reduce=False)
         lr = float(args.lr)
-        print(lr)
+        # print(lr)
         optimizer = optim.Adam(model.parameters(), lr=lr)
         lr_sched = optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=8, verbose=True)
         run([(model, 0, dataloaders, optimizer, lr_sched, args.comp_info)], criterion, num_epochs=int(args.epoch))
     else:
         model = torch.load(args.load_model)
-        print("loaded",args.load_model)
+        # print("loaded",args.load_model)
         prob_val, val_loss, val_map, indexArray, classAccuracy = val_step(model, 0, dataloaders['val'], args.epoch)
         frames = calculate_frames(args.video_name)
         output_csv(indexArray, frames, args.video_name, args.load_model, val_map, val_loss, classAccuracy)
