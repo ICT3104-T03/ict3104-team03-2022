@@ -6,6 +6,8 @@ data/
 video_features/
 videosCaptionOutput/
 wandb/
+dataExtractionOutput/
+TSU/TSU_RGB_i3D_feat/
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
