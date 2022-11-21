@@ -1,0 +1,13 @@
+name: life
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - ipywidgets=8.0.2
+  - jupyter=1.0.0
+  - timm==0.4.12
+  - pickle5
+  - scikit-learn
+  - numpy
+
+prefix: C:\Users\Henry\anaconda3\envs\life
