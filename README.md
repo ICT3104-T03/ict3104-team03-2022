@@ -1,77 +1,69 @@
 # ICT3104-team03-2022
 
 Toyota Smart Home Project: Using Machine Learning to View Activities in a Home
+[![TSU](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1RWC0_zKn77J2JQ3FgpnN-3yYM8_G4NDc?usp=sharing) TSU
 
-## Install Requirements
-### 1. Python.10
-### 2. Pip 22.2.2
-### 3. Anaconda3 2021.05
+NVlabs STEP:  Spatio-Temporal Progressive Learning for Video Action Detection
+[![STEP Model](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wYctHaCqZjhusdZDGKMTbznpUH-8xd5J?usp=sharing) STEP
 
-## Set up
-### 1. Search Anaconda Prompt in Windows Search
+MS-TCT : Multi-Scale Temporal ConvTransformer for Action Detection
+[![MSTCT](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15pbIxBEK0dkYwbQUNChpfZmaaX2xgNO7?usp=sharing) MSTCT
 
-### 2. Open the Anaconda Terminal, cd into directory and type in the commands below
-```
-cd C:\Users\~DirectoryLocation~\Desktop\CurrentProjects\ict3104-team03-2022
-```
+## Set up on Google Colab
 
-### 3. Create a new and clean virtual environment (May need to pip install virtualenv)
+### 1. Upload and open 3104Project.ipynb & Grp3_3104Project.ipynb to google colab, ensure it is stored in Google Drive with the root pointing to `drive/MyDrive/Colab Notebooks/` 
 
-```
-virtualenv new_env 
-```
+![upload notebook](./colablocation.png)
 
-### 4. Step into the virtual environment
+### 2. Email [chuashengyu98@gmail.com](mailto:chuashengyu98@gmail.com) for the sharing of folder structures and updated codes.
 
-```
-.\new_env\Scripts\activate
-```
+* For TSU  :
+  ```
+  - /content/MyDrive/ict3104-team03-2022
+  ```
 
-### 5. Create a new conda environment, press y to continue installation
-```
-conda create -n life python=3.8
-```
+* For STEP : 
+  ```
+  - /content/MyDrive/NVIDIA_STEP/STEP/
+  ```
+ 
+* For MS-TCT:
+  ```
+  - /content/MyDrive/MSTCT/MS-TCT/
+  - /content/MyDrive/MSTCT/py-torchi3d/
+  ```
+  
+ More indepth locations are written in the code.
 
-### 6. Install pytorch library
-Check if your laptop is Cuda enabled. [Nvidia](https://developer.nvidia.com/cuda-gpus#compute)
-```
-@@ CUDA 10.2 @@
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=10.2 -c pytorch
-@@ CUDA 11.3 @@
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=11.3 -c pytorch
-@@ CUDA 11.6 @@
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cudatoolkit=11.6 -c pytorch -c conda-forge
-@@ CPU Only @@
-conda install pytorch==1.9.0 torchvision==0.10.0 torchaudio==0.9.0 cpuonly -c pytorch
-```
+### 3. Add a shortcutt from the shared folder from google drive to the personal drive
 
-### 7. Create a new conda environment
-```
-conda activate life
-```
+![add shortcut](./addshortcut.png)
 
-### 8. Install the library dependencies
-```
-pip install -r requirements.txt
-```
+### 4. Run the colab on GPU/TPU with high-ram under `edit > notebook settings`
 
-## Continue Development
-### 1. Go into the root repository
-```
-cd to project directory
-```
-### 2. Activate the virtual environment
-```
-.\new_env\Scripts\activate
-```
+![change nb settings](./notebooksettings.png)
 
-### 3. Activate the conda environment
-```
-conda activate life
-```
+## References
+@article{dai2022toyota,
+  title={Toyota smarthome untrimmed: Real-world untrimmed videos for activity detection},
+  author={Dai, Rui and Das, Srijan and Sharma, Saurav and Minciullo, Luca and Garattoni, Lorenzo and Bremond, Francois and Francesca, Gianpiero},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2022},
+  publisher={IEEE}
+}
 
+@inproceedings{cvpr2019step,
+   title={STEP: Spatio-Temporal Progressive Learning for Video Action Detection},
+   author={Yang, Xitong and Yang, Xiaodong and Liu, Ming-Yu and Xiao, Fanyi and Davis, Larry S and Kautz, Jan},
+   booktitle={IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+   year={2019}
+}
 
-### 11. Start Jupyter Notebook
-```
-jupyter notebook
-```
+@inproceedings{dai2022mstct,
+    title={{MS-TCT: Multi-Scale Temporal ConvTransformer for Action Detection}},
+    author={Dai, Rui and Das, Srijan and Kahatapitiya, Kumara and Ryoo, Michael and Bremond, Francois},
+    booktitle={CVPR},
+    year={2022}
+  }
+  
+
